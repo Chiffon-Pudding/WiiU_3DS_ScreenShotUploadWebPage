@@ -79,7 +79,7 @@ $mes_unknown_file_not_allowed = 'アップロードされたファイルのMIME�
 
 
 
-if(isset($_FILES['uploaded_file']['error']) || is_int($_FILES['uploaded_file']['error'])){
+if(isset($_FILES['uploaded_file']['error']) && is_int($_FILES['uploaded_file']['error'])){
 
     try {
 
