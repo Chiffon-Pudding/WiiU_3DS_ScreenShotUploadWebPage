@@ -1,0 +1,2 @@
+# WiiU_3DS_ScreenShotUploadWebPage
+WiiU及び3DSでWebブラウザ経由で画像ファイル等を保存するためのWebページです。使用するには別途PHP5.3以降が動作するhttpサーバが必要です。
