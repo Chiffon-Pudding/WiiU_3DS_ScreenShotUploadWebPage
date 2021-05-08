@@ -120,7 +120,7 @@ if(isset($_FILES['uploaded_file']['error']) && is_int($_FILES['uploaded_file']['
                             break;
                         case 'width="640" height="480"':
                             $save_file_dir = $save_dir_root . $save_dir_3ds . $save_dir_3ds_photo;
-                            $file_type_analysis_results  = $save_dir_3ds_photo;
+                            $file_type_analysis_results  = $mes_analyzed_3ds_photo;
                             break;
                         case 'width="432" height="528"':
                             $save_file_dir = $save_dir_root . $save_dir_3ds . $save_dir_3ds_dual;
