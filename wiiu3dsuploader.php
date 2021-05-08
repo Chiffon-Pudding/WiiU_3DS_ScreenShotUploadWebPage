@@ -5,6 +5,10 @@ header("Content-type: text/html; charset=utf-8");
 // Settings
 
 $size_limit = 2000000;
+$save_file_name_random_bytecode_digits = 3; // ファイル名真ん中に付く衝突防止用ランダムバイトコードの桁数。指定数xバイト分。
+$auto_mkdir = true;
+$auto_chmod_dir = true;
+$upload_file_permission = 0644;
 $allow_file_jpeg = true;
 $allow_nonstandard_res_jpeg = true;
 $allow_file_mkv = true;
@@ -165,12 +169,18 @@ if(isset($_FILES['uploaded_file']['error']) || is_int($_FILES['uploaded_file']['
                 break;
         }
 
-        $save_file_name = date('YmdHis') . '_' . bin2hex(openssl_random_pseudo_bytes(2)) . "_" . basename($_FILES['uploaded_file']['name']);
+        $save_file_name = date('YmdHis') . '_' . bin2hex(openssl_random_pseudo_bytes($save_file_name_random_bytecode_digits)) . "_" . basename($_FILES['uploaded_file']['name']);
 
         $upload_file_path = $save_file_dir . $save_file_name;
 
+        if($auto_mkdir && !is_dir($save_file_dir)){
+            mkdir($save_file_dir, 0777, true);
+        } elseif($auto_chmod_dir) {
+            chmod($save_file_dir,0777);
+        }
+
         if(!file_exists($upload_file_path) && move_uploaded_file($_FILES['uploaded_file']['tmp_name'],$upload_file_path)){
-            chmod($upload_file_path, 0644);
+            chmod($upload_file_path, $upload_file_permission);
             $msg = [$mes_upload_successed_color , $mes_upload_successed];
         } else {
             throw new RuntimeException($mes_upload_failed);
