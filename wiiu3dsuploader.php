@@ -98,7 +98,7 @@ if(isset($_FILES['uploaded_file']['error']) && is_int($_FILES['uploaded_file']['
                 break;
         }
 
-        $save_file_size = $_FILES['uploaded_file'][size];
+        $save_file_size = $_FILES['uploaded_file']['size'];
         if ($save_file_size > $size_limit) {
             throw new RuntimeException($mes_error_file_too_large);
         }
